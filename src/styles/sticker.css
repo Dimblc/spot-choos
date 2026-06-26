@@ -1,0 +1,84 @@
+:root {
+  --sticker-rotate: 0deg;
+  --sticker-p: 20%;
+  --sticker-shadow-opacity: 0.6;
+  --sticker-lighting-constant: 0.1;
+  --peel-direction: 0deg;
+  --peel-progress: 0%;
+  --sticker-start: calc(-1 * var(--sticker-p));
+  --sticker-end: calc(100% + var(--sticker-p));
+  --sticker-width: 200px;
+}
+
+.sticker-container {
+  transform: rotate(var(--peel-direction));
+  transform-origin: 50%;
+  position: relative;
+}
+
+.sticker-container * {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sticker-main {
+  clip-path: polygon(
+    var(--sticker-start) var(--peel-progress),
+    var(--sticker-end) var(--peel-progress),
+    var(--sticker-end) var(--sticker-end),
+    var(--sticker-start) var(--sticker-end)
+  );
+  will-change: clip-path;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, calc(var(--sticker-shadow-opacity) * 0.5)));
+}
+
+.sticker-main > * {
+  transform: rotate(calc(-1 * var(--peel-direction)));
+}
+
+.sticker-image {
+  transform: rotate(var(--sticker-rotate));
+  width: 100%;
+  height: auto;
+}
+
+.flap {
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(
+    var(--sticker-start) var(--sticker-start),
+    var(--sticker-end) var(--sticker-start),
+    var(--sticker-end) var(--peel-progress),
+    var(--sticker-start) var(--peel-progress)
+  );
+  left: 0;
+  top: calc(-100% + 2 * var(--peel-progress) - 1px);
+  will-change: clip-path, top;
+  position: absolute;
+  transform: scaleY(-1);
+  background: transparent;
+}
+
+.flap > * {
+  transform: rotate(calc(-1 * var(--peel-direction)));
+}
+
+.flap-image {
+  transform: rotate(var(--sticker-rotate));
+  width: 100%;
+  height: auto;
+  opacity: 0;
+}
+
+.flap-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: rotate(var(--sticker-rotate));
+  filter: grayscale(1) brightness(0.5) contrast(0);
+}
