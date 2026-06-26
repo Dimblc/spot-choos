@@ -1,7 +1,5 @@
-import BlobButton from "@/components/ui/BlobButton";
 import ImageReveal from "@/components/ui/image-tiles";
 import SplitText from "@/components/animations/SplitText";
-import ScrollReveal from "@/components/animations/ScrollReveal";
 import StickerReveal from "@/components/animations/StickerReveal";
 
 export default function About() {

@@ -35,6 +35,9 @@ export default function ProjectButton({
 
   if (href) {
     const linkClass = cn(linkBaseClasses, themeClass);
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      onClick?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
+    };
 
     if (external) {
       return (
@@ -43,7 +46,7 @@ export default function ProjectButton({
           target="_blank"
           rel="noopener noreferrer"
           className={linkClass}
-          onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+          onClick={handleLinkClick}
           aria-label={props["aria-label"]}
         >
           <span className="relative z-10 inline-flex items-center justify-center gap-2">
@@ -57,7 +60,7 @@ export default function ProjectButton({
       <Link
         href={href}
         className={linkClass}
-        onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+        onClick={handleLinkClick}
         aria-label={props["aria-label"]}
       >
         <span className="relative z-10 inline-flex items-center justify-center gap-2">

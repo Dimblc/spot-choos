@@ -63,7 +63,7 @@ export default function SplitText({
       if (!ref.current || !text || !fontsLoaded) return;
       if (animationCompletedRef.current) return;
 
-      const el = ref.current as HTMLElement & { _rbsplitInstance?: any };
+      const el = ref.current as HTMLElement & { _rbsplitInstance?: { revert(): void } | null };
 
       if (el._rbsplitInstance) {
         try {

@@ -40,7 +40,6 @@ export default function Hero() {
   // Сыр (34% → 44%) — scale: 0.2→1, rotate: 45→0, изначально невидим
   const cheeseScale = useTransform(smoothProgress, [0.34, 0.44], [0.2, 1]);
   const cheeseRotate = useTransform(smoothProgress, [0.34, 0.44], [45, 0]);
-  const cheeseImpact = useTransform(smoothProgress, [0.42, 0.43, 0.44], [1, 1.1, 1]);
   const cheeseOpacity = useTransform(smoothProgress, [0.32, 0.36], [0, 1]);
 
   // Бекон (44% → 54%) — x: 700→0, rotate: 25→0, изначально невидим
