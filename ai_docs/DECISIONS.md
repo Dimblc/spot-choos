@@ -1,5 +1,58 @@
 # DECISIONS — Spot & Choo's
 
+## 2026-06-30
+### Hero: зацикленное видео вместо scroll-driven canvas
+- **Решение:** Заменить scroll-driven видео на canvas (извлечение кадров, lerp-интерполяция) на простое зацикленное видео `herovideo.mp4` (`autoPlay muted loop playsInline`).
+- **Причина:** Пользователь запросил простое зацикленное видео без реакции на скролл. Упрощение кода, меньшая нагрузка на память (не нужно хранить все кадры в `ImageBitmap[]`).
+- **Автор:** AI.
+
+### Скролл: Lenis вместо body.style.overflow
+- **Решение:** В `GsapProvider` заменить ручное управление `body.style.overflow` на `lenis.stop()` / `lenis.start()`. Добавить `usePathname()` для пересчёта ScrollTrigger и Lenis при смене маршрута.
+- **Причина:** Конфликт двойного управления скроллом (Lenis + `body.style.overflow`) приводил к застреванию скролла. При смене страницы Lenis хранил устаревшую высоту, а ScrollTrigger-триггеры оставались от старой страницы.
+- **Автор:** AI.
+
+### overflow-x-clip вместо overflow-x-hidden
+- **Решение:** В `Menu.tsx` заменить `overflow-x-hidden` на `overflow-x-clip`.
+- **Причина:** CSS-спецификация — `overflow-x: hidden` неявно делает `overflow-y: auto`, создавая отдельный скролл-контейнер с собственной полосой прокрутки. `overflow-x: clip` обрезает без создания скролл-контейнера.
+- **Автор:** AI.
+
+### Шрифт Manrope для основного текста
+- **Решение:** Добавить Google Fonts Manrope через `next/font/google` (`--font-manrope`), утилиту `font-body`. Использовать для основного текста на `/about` и `/menu` вместо `font-modak`.
+- **Причина:** Фирменный жирный шрифт (`font-modak` / PoppingCute) тяжело читается в длинных абзацах. Manrope — современный гротеск с поддержкой кириллицы, хорошо контрастирует с заголовками.
+- **Автор:** AI.
+
+### Premium Locations redesign
+- **Решение:** Полностью переписать `Locations.tsx` с премиум-дизайном: жёлтый градиент, doodle-декорации (inline SVG), 12-колоночная сетка 3+2, PNG-стикеры, штамп, starburst.
+- **Причина:** Пользователь запросил раздел уровня Awwwards/Behance с sticker-aesthetic и doodle-стилем.
+- **Автор:** AI.
+
+### Страницы /about и /menu: отдельные клиентские компоненты
+- **Решение:** Создать `AboutPageContent.tsx` и `MenuPageContent.tsx` как клиентские компоненты с ScrollReveal-анимациями, декоративными SVG, карточками и CTA.
+- **Причина:** Пользователь запросил премиум-разделы с микроанимациями, декоративными элементами и интерактивом — требуется `"use client"`.
+- **Автор:** AI.
+
+### CSS-анимации вместо GSAP для микроанимаций
+- **Решение:** Добавить CSS keyframes (`wobble`, `pulse-soft`, `draw-wave`, `float-soft`) и утилитарные классы (`.anim-*`) для лёгких декоративных анимаций вместо GSAP.
+- **Причина:** Меньше overhead, проще поддержка, не требуют ScrollTrigger. Учтён `prefers-reduced-motion`.
+- **Автор:** AI.
+
+## 2026-06-27
+### Защита лоадера от зависания
+- **Решение:** В `GsapProvider` добавлен safety-timeout 8с, принудительно снимающий лоадер и разблокирующий скролл, даже если Hero не вызвал `setHeroReady`. В `Hero.tsx` добавлен `onError` видео и вызов `setHeroReady()` при отсутствии длительности.
+- **Причина:** При ошибке загрузки `Kawaii_cheeseburger.mp4` лоадер зависал навсегда (`body { overflow: hidden }`).
+- **Автор:** AI.
+
+### Fallback для внешних изображений
+- **Решение:** Создан клиентский компонент `RemoteImage` (`src/components/ui/remote-image.tsx`) — обёртка над `next/image` с onError-fallback («Фото недоступно»). Внедрён в `/menu`, `/about`, `/gallery`.
+- **Альтернатива:** Хостить все изображения локально.
+- **Причина:** Внешние CDN (`spotandchoos.com`, `cdn.prod.website-files.com`) могут быть недоступны — нужен graceful degradation.
+- **Автор:** AI.
+
+### Удаление мёртвого кода и актуализация документации
+- **Решение:** Удалены `BurgerEyes.tsx` (не импортировался) и неиспользуемый `homeActions` из `data.ts`. `dev-stderr.txt`/`dev-stdout.txt` добавлены в `.gitignore`. AI-документация (`FILE_MAP`, `ARCHITECTURE`, `FUNCTIONS_MAP`, `PROJECT_OVERVIEW`, `AI_INDEX`, `OPEN_TASKS`) приведена в соответствие с кодом.
+- **Причина:** Документация описывала удалённые файлы (`PopText`, `JellyWave`, `Contact.tsx`, `useLenis.ts`, удалённые ассеты) и устаревшее поведение компонентов.
+- **Автор:** AI.
+
 ## 2026-06-24
 ### Обновление AI-документации
 - **Решение:** Привести `AI_INDEX.md`, `PROJECT_OVERVIEW.md`, `ARCHITECTURE.md`, `FILE_MAP.md`, `FUNCTIONS_MAP.md`, `OPEN_TASKS.md`, `CODING_RULES.md`, `DEPLOYMENT.md` и `API.md` в соответствие с актуальным состоянием проекта.

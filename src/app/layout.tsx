@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Modak } from "next/font/google";
+import { Modak, Manrope } from "next/font/google";
 import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 import GsapProvider from "@/components/providers/GsapProvider";
@@ -21,6 +21,12 @@ const poppingCute = localFont({
   display: "swap",
 });
 
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Spot & Choo's | Бургеры в Новосибирске",
   description: "Легендарная бургерная Spot&Choo's. Смэш-бургеры на картофельной булочке. Меню / Адреса / Афиша / Галерея",
@@ -38,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={cn(modak.variable, poppingCute.variable, "h-full antialiased")}>
+    <html lang="ru" className={cn(modak.variable, poppingCute.variable, manrope.variable, "h-full antialiased")}>
       <body className="min-h-full flex flex-col bg-beige text-black">
         <GsapProvider>
           <LoadingScreen />

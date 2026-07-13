@@ -16,6 +16,7 @@ export default function Home() {
         <About />
         <WaveDivider />
         <Menu />
+        <WaveDivider flip />
         <Ingredients />
         <Locations />
       </main>

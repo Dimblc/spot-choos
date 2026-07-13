@@ -3,7 +3,13 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-export default function WaveDivider() {
+interface WaveDividerProps {
+  fill?: string;
+  className?: string;
+  flip?: boolean;
+}
+
+export default function WaveDivider({ fill = "#ff1616", className = "", flip = false }: WaveDividerProps) {
   const pathRef = useRef<SVGPathElement>(null);
 
   useEffect(() => {
@@ -27,16 +33,17 @@ export default function WaveDivider() {
   }, []);
 
   return (
-    <div className="leading-[0] h-[300px] -mt-20 md:-mt-28 overflow-hidden">
+    <div className={`leading-[0] h-[300px] overflow-hidden -mt-20 md:-mt-28 ${className}`}>
       <svg
         className="block w-full h-full"
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
+        style={flip ? { transform: "scaleY(-1)" } : undefined}
       >
         <path
           ref={pathRef}
           id="wavePath"
-          fill="#ff1616"
+          fill={fill}
           d="M0,120 C300,0 500,260 800,160 C1100,40 1250,220 1440,100 L1440,320 L0,320 Z"
         />
       </svg>

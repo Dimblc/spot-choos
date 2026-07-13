@@ -4,8 +4,3 @@
   --z-nav: 999;
   --z-overlay: 998;
 }
-
-/* Отключаем скролл при лоадере */
-.loading {
-  overflow: hidden;
-}

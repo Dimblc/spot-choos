@@ -20,10 +20,10 @@ export const locations: Location[] = [
     address: "ул. Ильича, 10",
     district: "Академгородок",
     phone: "+79833121420",
-    phoneDisplay: "+7-983-312-1-420",
+    phoneDisplay: "+7-983-312-14-20",
     telegram: "https://t.me/spotandchoos",
     hours: ["вс–чт  12:00 – 23:00", "пт–сб  12:00 – 00:00"],
-    image: "https://cdn.prod.website-files.com/64d8af984c758e0313a895b7/65c4903be67f3562ff9b38e9_photo_2023-08-11%2013.19.11.jpeg",
+    image: "/img-webp/orig.png",
     hasGallery: true,
   },
   {
@@ -33,10 +33,10 @@ export const locations: Location[] = [
     address: "ул. Коммунистическая, 45",
     district: "Центр",
     phone: "+79833020420",
-    phoneDisplay: "+7-983-302-0-420",
+    phoneDisplay: "+7-983-302-04-20",
     telegram: "https://t.me/spotandchooskom45",
     hours: ["вс–чт  12:00 – 23:00", "пт–сб  12:00 – 00:00"],
-    image: "https://cdn.prod.website-files.com/64d8af984c758e0313a895b7/64fe8de0e6e4f3a42a8c5614_photo_2023-08-04%2019.25_5.png",
+    image: "/img-webp/kom45.png",
     hasGallery: true,
   },
   {
@@ -46,10 +46,10 @@ export const locations: Location[] = [
     address: "ул. Ленина, 3",
     district: "Центр",
     phone: "+79132030420",
-    phoneDisplay: "+7-913-203-0-420",
+    phoneDisplay: "+7-913-203-04-20",
     telegram: "https://t.me/Spotandchooslite",
     hours: ["вс–сб  12:00 – 22:00"],
-    image: "https://cdn.prod.website-files.com/64d8af984c758e0313a895b7/64fe9aba2994b2723af306aa_photo_2023-08-04%2020.47_2.png",
+    image: "/img-webp/lite.png",
     hasGallery: true,
   },
   {
@@ -59,10 +59,10 @@ export const locations: Location[] = [
     address: "ул. Блюхера, 32/1",
     district: "Левый берег (общежитие НГТУ №6)",
     phone: "+79139040420",
-    phoneDisplay: "+7-913-904-0-420",
+    phoneDisplay: "+7-913-904-04-20",
     telegram: "https://t.me/spotAndchoosLeft",
     hours: ["вс–чт  12:00 – 22:00", "пт–сб  12:00 – 23:00"],
-    image: "https://cdn.prod.website-files.com/64d8af984c758e0313a895b7/65c48b708470ab07c3b4ef0b_photo_2023-08-04%2013.22.43.jpeg",
+    image: "/img-webp/NSTU.png",
     hasGallery: true,
   },
   {
@@ -72,10 +72,10 @@ export const locations: Location[] = [
     address: "ул. Ак. Сандахчиева, 5",
     district: "Кольцово",
     phone: "+79130141420",
-    phoneDisplay: "+7-913-014-1-420",
+    phoneDisplay: "+7-913-014-14-20",
     telegram: "https://t.me/spotandchoosKoltsovo",
     hours: ["вс–сб  12:00 – 22:00"],
-    image: "https://cdn.prod.website-files.com/64d8af984c758e0313a895b7/68382c27a3f01c1fe7be41a7_photo_2025-05-29%2014.42.21.jpeg",
+    image: "/img-webp/Koltsovo.png",
     hasGallery: false,
   },
 ];
@@ -103,11 +103,6 @@ export const navLinks = [
   { href: "/about", label: "О нас" },
   { href: "/gallery", label: "Галерея" },
   { href: "/contact", label: "Контакты" },
-];
-
-export const homeActions = [
-  { href: "https://m.loyaltyplant.com/3177", label: "Скачать Приложение", color: "red", external: true },
-  { href: "/gallery", label: "Галерея", color: "dark" },
 ];
 
 export const socialLinks = [

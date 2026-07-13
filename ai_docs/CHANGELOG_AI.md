@@ -1,5 +1,92 @@
 # CHANGELOG_AI — Spot & Choo's
 
+## 2026-06-30 — Locations redesign, About page, Menu page, Hero video, scroll fix, fonts, animations
+
+### Locations (главная)
+- `Locations.tsx`: полностью переписан — премиум-дизайн по промпту (Awwwards/Behance уровень):
+  - Жёлтый градиент `#FFD95A → #F5C43E`, paper-texture (SVG noise), радиальное освещение.
+  - Заголовок «НАШИ ТОЧКИ» (`font-modak`, `#2E2A24`), белая hand-drawn подчёркивающая линия (SVG), чёрный бейдж «ВСЕГДА РЯДОМ, ВСЕГДА ВКУСНО!».
+  - 12-колоночная сетка, 3 карточки в первом ряду + 2 центрированных во втором (`col-start-[3]`).
+  - Карточки: белые, `rounded-[24px]`, мягкая тень, `p-7/p-8`, фото `aspect-square` с `ring-1 ring-black/[0.06]`, hover-подъём + `scale-105` на фото.
+  - Декор: пунктирный travel-path (SVG), hand-drawn стрелка, спарклы, звёзды, мазки-кисть.
+  - Низ: наклонный винтажный штамп «Spot & Choo's» (double border, `#FF4D3A`), жёлтый starburst «Мы любим то, что делаем ❤️».
+  - Анимация: GSAP fade-up + scale по скроллу (stagger), `prefers-reduced-motion` учтён.
+- Фото точек: переключались между CDN, локальными `public/img-webp/locations/`, и обратно на `public/img-webp/{orig,kom45,lite,NSTU,Koltsovo}.png`. Финальный вариант — локальные PNG из `public/img-webp/`.
+- Стикеры на карточках: изначально SVG (Mustard, Sparkle, Cheese, ChefHat, BurgerBag), затем заменены на PNG из `Downloads/stick/` → `public/img-webp/stickers/sticker-{original,kom45,lite,nstu,koltsovo}.png`, `quality=100`, поворот `-14deg`, hover-анимация.
+- Описание перенесено наверх карточки (имя, адрес, телефон), фото — под ним.
+- Стикеры увеличены (72→90px, 96→120px) и опущены ниже (`-top-5` → `-top-2`).
+- Убраны спарклы, звёздочки и стрелка вокруг заголовка «НАШИ ТОЧКИ».
+- `RemoteImage`: добавлен проп `quality` (по умолчанию 90), для карточек точек — `quality=100`, `sizes` увеличен до `600px`.
+
+### Страница /about
+- Создан `src/components/sections/AboutPageContent.tsx` — премиум-раздел «О нас» в стиле street food:
+  - Первый экран: «О НАС» (красный, белая обводка, уменьшен на 20%), подзаголовок «История нашего вкуса и команды», 3 абзаца текста (Manrope, `#444`, `leading-[1.6]`), фото основателей в скруглённой карточке с логотипом-пилюлей и декором (стрелка, штрихи, спаркл).
+  - Инфо-пилюли: «Основаны в 2020», «Академгородок, Нск», «100+ бургеров ежедневно».
+  - 3 карточки: фото команды + «Наш ресторан», «Еда с характером» с волнистой линией, фото входа + «Наше место» с красным сердцем.
+  - Нижний баннер: круглый логотип, «Это не просто еда. Это культура.», чёрно-белые SVG-иллюстрации (бургер с глазами, картошка фри, стакан, спаркл, звёздочка, стрелка).
+  - CTA: `BlobButton` «Попробовать наши бургеры →».
+  - Подписи под фото: «Основатели Spot&Choo's», «Наш первый дом», «Место, где всё началось».
+  - Микроанимации: hover-подъём карточек, `scale-105` на фото, `anim-wobble`, `anim-pulse-soft`, `anim-float-soft`, `anim-draw-wave`, `ScrollReveal`.
+- `app/about/page.tsx`: обновлён — использует `AboutPageContent`, убран отступ сверху.
+- Фон: изменён с кремового `#F9F2E8` на `#F5E3CD` (beige, как на всём сайте).
+- Текст первого блока обновлён на 3 абзаца (по запросу пользователя).
+- `About.tsx` (главная): возвращён к оригинальной версии (изменения не на главной).
+
+### Страница /menu
+- Создан `src/components/sections/MenuPageContent.tsx` — полностью переработанный раздел меню:
+  - Hero: «МЕНЮ» (красный, обводка), подзаголовок, 2 CTA («📍 Найти ближайший ресторан», «📱 Заказать в Telegram»), маскот (`mascot.png`) с декором.
+  - Блок преимуществ: 4 карточки (5 точек, предзаказ, свежие ингредиенты, быстрое приготовление).
+  - Карточки филиалов (3+2): район, адрес с иконкой карты, телефон, фото меню с hover-zoom и бейджем «Нажми для увеличения», 2 кнопки («🖼 Открыть меню», «📱 Заказать в Telegram»).
+  - Карта покрытия: круглый логотип → пунктирный маршрут (SVG, `anim-draw-wave`) → красная геометка, подпись «Мы рядом в любом районе города.»
+  - Заполнитель: красная карточка-цитата «C YA, FELLAS & SISTAS!» с сердцем и волнистой линией.
+  - Лайтбокс сохранён.
+- `app/menu/page.tsx`: обновлён — использует `MenuPageContent`.
+
+### Hero
+- `Hero.tsx`: полностью переписан — зацикленное видео `herovideo.mp4` (`autoPlay muted loop playsInline`) вместо scroll-driven canvas. Убраны `useScroll`, `useTransform`, извлечение кадров, lerp-интерполяция.
+- Видео `herovideo.mp4` (45 МБ) скопировано из `Downloads/menu/` в `public/img-webp/`.
+- Убрана надпись «SPOT & CHOO'S».
+- `onCanPlay` вызывает `setHeroReady()` для синхронизации с лоадером.
+
+### Скролл-баги
+- `GsapProvider.tsx`: исправлены баги застревания скролла:
+  - Замена `body.style.overflow = "hidden"/"auto"` на `lenis.stop()` / `lenis.start()` — устранён конфликт двойного управления скроллом.
+  - Добавлен `usePathname()` + `useEffect` на смену маршрута: `lenis.scrollTo(0)`, `ScrollTrigger.refresh()`, `lenis.resize()`.
+  - Убран `ScrollTrigger.getAll().forEach((t) => t.kill())` из pathname-эффекта (убивал все анимации SplitText/ScrollReveal).
+- `Menu.tsx`: `overflow-x-hidden` → `overflow-x-clip` — устранена лишняя полоса прокрутки (CSS-баг: `overflow-x: hidden` неявно делает `overflow-y: auto`).
+
+### Шрифты и CSS
+- `layout.tsx`: добавлен шрифт Manrope (Google Fonts) через `next/font/google` — `--font-manrope`, `subsets: ["latin", "cyrillic"]`.
+- `globals.css`: добавлен `@utility font-body` (`var(--font-manrope)`), ключевые кадры `wobble`, `pulse-soft`, `draw-wave`, `float-soft`, утилиты `.anim-wobble`, `.anim-pulse-soft`, `.anim-draw-wave`, `.anim-float-soft`, `@media (prefers-reduced-motion)`.
+- `theme.css`: убран класс `.loading` (больше не используется).
+
+### Ассеты
+- `public/img-webp/about/`: `founders.png`, `team.png`, `entrance.png`, `banner.png` (из Downloads, 1448×1086).
+- `public/img-webp/menu/`: `mascot.png`, `logo-round.png` (из Downloads, 1536×1024).
+- `public/img-webp/stickers/`: `sticker-original.png`, `sticker-kom45.png`, `sticker-lite.png`, `sticker-nstu.png`, `sticker-koltsovo.png` (из Downloads).
+- `public/img-webp/herovideo.mp4`: видео для Hero (45 МБ, из Downloads).
+- `public/img-webp/locations/`: `original.png`, `kom45.png`, `lite.png`, `nstu.png`, `koltsovo.png` (из Downloads, 1254×1254) — сейчас не используются (фото берутся из `public/img-webp/`).
+
+### Фото бургера в Menu (главная)
+- `Menu.tsx`: фото бургера `burger-with-ruki.png` уменьшено на 25% (`90vw→67.5vw`, `119vw→89.25vw`), затем ещё на 10% (`67.5→60.75vw`, `89.25→80.25vw`, `max-w 1147→1032px`).
+
+### data.ts
+- Пути `image` для 5 точек: переключались между CDN и локальными PNG. Финал — локальные `/img-webp/{orig,kom45,lite,NSTU,Koltsovo}.png`.
+- Удалён `locationStickers` (заменён на `STICKER_IMAGES` в компоненте).
+
+## 2026-06-27 — Sticker in Ingredients, Hero refresh fix, button polish
+- `Ingredients.tsx`: добавлен стикер `sticker-burger.png` слева под иконкой огня, с наклоном `-12deg`, адаптивным размером (моб. `max-w-[260px]`, десктоп `max-w-[420px]`) и анимацией появления при скролле (`StickerReveal`).
+- `StickerReveal.tsx`: добавлен проп `rotate` для управления вращением стикера через CSS-переменную `--sticker-rotate`.
+- `public/img-webp/sticker-burger.png`: скопирован стикер `sticker1.png` из `Downloads/spoot_choos_stickers_no_bg_v2`.
+- `Hero.tsx`: при готовности кадров `currentFrameRef` и `targetFrameRef` теперь синхронизируются с текущим `scrollYProgress.get()`, устраняя резкий скачок при обновлении страницы не наверху.
+- `project-button.tsx`: длительность hover-заливки увеличена с `500ms` до `700ms` для более плавной анимации.
+- `GsapProvider.tsx`: добавлен safety-timeout 8с — принудительно снимает лоадер и разблокирует скролл, даже если Hero не сообщил о готовности. Защита от зависания при ошибке видео.
+- `Hero.tsx`: добавлен `onError` на `<video>` и вызов `setHeroReady()` при отсутствии `duration` — лоадер не блокирует сайт, если видео не загрузилось.
+- Создан `src/components/ui/remote-image.tsx` (`RemoteImage`) — обёртка над `next/image` с onError-fallback («Фото недоступно»). Внедрён в `menu/page.tsx`, `about/page.tsx`, `gallery/page.tsx` (вместо прямого `next/image` для внешних CDN).
+- Удалён мёртвый код: `src/components/animations/BurgerEyes.tsx` (не импортировался), неиспользуемый `homeActions` из `src/lib/data.ts`.
+- `.gitignore`: добавлены `dev-stderr.txt`, `dev-stdout.txt`.
+- AI-документация синхронизирована с кодом: переписаны `FILE_MAP.md`, `ARCHITECTURE.md`, `FUNCTIONS_MAP.md`; обновлены `AI_INDEX.md`, `PROJECT_OVERVIEW.md`, `OPEN_TASKS.md`; добавлены записи в `DECISIONS.md` и этот `CHANGELOG_AI.md`.
+
 ## 2026-06-26 — Codebase cleanup, accessibility, SEO and lint
 - Удалён мёртвый код: `src/components/sections/Contact.tsx` (не импортировался), `src/components/animations/PopText.tsx` (не импортировался), `src/components/animations/JellyWave.tsx` (не импортировался).
 - Удалены неиспользуемые ассеты: `public/img-webp/burger-hero.webp`, `tomato.webp`, `cheese.webp`, `meat.webp`, `lettuce.webp`, `public/img/plane.png`.

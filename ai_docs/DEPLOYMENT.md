@@ -39,4 +39,7 @@ node ./node_modules/next/dist/bin/next start
 ## Хрупкие места
 - Апостроф в пути к проекту ломает npm-скрипты.
 - Внешние изображения на `/menu`, `/about`, `/gallery` зависят от доступности `spotandchoos.com` и `cdn.prod.website-files.com`. Рекомендуется либо скачать их в `public/`, либо настроить `images.remotePatterns` в `next.config.ts`.
+- Фото точек в Locations — локальные (`public/img-webp/{orig,kom45,lite,NSTU,Koltsovo}.png`), `quality=100` — требует настройки `images.qualities: [75, 100]` в `next.config.ts` (иначе браузерные warns).
 - Форма обратной связи использует Google Forms; при изменении формы нужно обновить entry IDs в `src/lib/data.ts`.
+- `herovideo.mp4` (45 МБ) — большое видео, может требовать оптимизации для продакшена.
+- `overflow-x: hidden` в секциях создает лишний скролл-контейнер — использовать `overflow-x: clip`.

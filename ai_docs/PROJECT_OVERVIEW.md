@@ -7,30 +7,42 @@
 - Базовая структура проекта создана.
 - Конфиги и стартовые страницы на месте.
 - Компоненты-секции созданы и анимированы.
-- Реальные фото бургеров и ингредиентов добавлены в `public/img-webp/`.
+- Hero — зацикленное видео `herovideo.mp4` (`autoPlay muted loop`), без scroll-driven.
+- Реальные фото бургеров, ингредиентов, точек, команды добавлены в `public/img-webp/`.
 - Реальные данные по локациям, меню, галерее и странице «О нас» в `src/lib/data.ts`.
+- Страница `/about` — премиум-раздел с hero, 3 карточками, баннером, CTA, декоративными SVG и микроанимациями (`AboutPageContent`).
+- Страница `/menu` — премиум-раздел с hero, преимуществами, карточками филиалов, картой покрытия, CTA, лайтбоксом (`MenuPageContent`).
+- Секция Locations (главная) — премиум-дизайн: жёлтый градиент, doodle-декор, 12-кол. сетка 3+2, PNG-стикеры, штамп, starburst.
 - Добавлена страница `/gallery` с категориями фото.
-- Форма обратной связи на главной и на `/contact` отправляет данные в Google Forms (конфигурация в `src/lib/data.ts`).
-- Оставшиеся placeholder: самолёт доставки (`public/img/plane.png`) и некоторые внешние изображения, загружаемые с `cdn.prod.website-files.com` и `spotandchoos.com`.
+- Форма обратной связи на `/contact` отправляет данные в Google Forms.
+- Внешние изображения проходят через `RemoteImage` с onError-fallback и `quality` пропом.
+- Лоадер защищён safety-timeout; скролл управляется через `lenis.stop()/start()`.
+- При смене маршрута — `ScrollTrigger.refresh()` + `lenis.resize()`.
+- Добавлен шрифт Manrope для основного текста; CSS keyframes для микроанимаций.
 
 ## Технологический стек
 - **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS v4
-- **Animation:** GSAP (ScrollTrigger, SplitText, MorphSVG), Framer Motion (для компонента `ImageReveal` в секции About)
+- **Animation:** GSAP (ScrollTrigger, SplitText), Framer Motion (ImageReveal), CSS keyframes (wobble, pulse-soft, draw-wave, float-soft)
 - **Smooth scroll:** Lenis
-- **Fonts:** Google Fonts via `next/font` (Modak для латиницы), локальный `PoppingCute.ttf` для кириллицы
+- **Fonts:** Google Fonts (Modak для латиницы, Manrope для основного текста), локальный `PoppingCute.ttf` для кириллицы
 
 ## Целевые пользователи
 Жители Новосибирска, ищущие крафтовые бургеры с доставкой или самовывозом.
 
-## Ключевые секции
-1. Hero — главный экран с бургером.
-2. About — о бренде, CTA на меню, галерея из 3 фото.
-3. Menu — красный экран с предложениями.
-4. Ingredients — летающие ингредиенты и качество.
-5. Locations — районы Новосибирска (доставка/точки).
-6. Contact — контакты и форма обратной связи.
+## Ключевые секции (главная)
+1. Hero — зацикленное видео `herovideo.mp4`, кнопка «СМОТРЕТЬ МЕНЮ».
+2. About — о бренде, заголовок, ImageReveal из 3 фото, стикеры.
+3. Menu — красный экран, статистика, бургер с руками.
+4. Ingredients — заголовок и описание качества.
+5. Locations — премиум-секция «НАШИ ТОЧКИ»: жёлтый градиент, doodle-декор, 3+2 карточки, стикеры, штамп, starburst.
+
+## Дополнительные страницы
+- `/about` — премиум-раздел «О нас» (`AboutPageContent`): hero, 3 карточки, баннер, CTA.
+- `/menu` — премиум-раздел меню (`MenuPageContent`): hero, преимущества, карточки филиалов, карта покрытия, лайтбокс.
+- `/gallery` — галерея с категориями фото.
+- `/contact` — контакты и форма обратной связи (Google Forms).
 
 ## Внешние изображения
-Часть контента (меню, галерея, фото на `/about`) загружается с внешних CDN (`cdn.prod.website-files.com`, `spotandchoos.com`). В `next.config.ts` не настроен `images.remotePatterns`, поэтому используется обычный `<img>` с отключением ESLint-правила `@next/next/no-img-element`.
+Часть контента (меню, галерея, фото на `/about`) загружается с внешних CDN (`cdn.prod.website-files.com`, `spotandchoos.com`). В `next.config.ts` настроен `images.remotePatterns`. Все внешние изображения рендерятся через `RemoteImage` (`src/components/ui/remote-image.tsx`) с onError-fallback.

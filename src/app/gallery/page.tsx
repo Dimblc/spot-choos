@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ProjectButton from "@/components/ui/project-button";
+import RemoteImage from "@/components/ui/remote-image";
 import { galleryCategories } from "@/lib/data";
 
 export default function GalleryPage() {
@@ -57,7 +57,7 @@ export default function GalleryPage() {
                   onClick={() => { setLightboxSrc(src); setLightboxCaption(active.title); }}
                 >
                   <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[2vw] md:rounded-[1vw] border-2 border-red/20 group-hover:border-red transition-colors">
-                    <Image
+                    <RemoteImage
                       src={src}
                       alt={`${active.title} ${i + 1}`}
                       fill
