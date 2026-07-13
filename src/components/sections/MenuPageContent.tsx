@@ -5,6 +5,7 @@ import Image from "next/image";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import ProjectButton from "@/components/ui/project-button";
 import RemoteImage from "@/components/ui/remote-image";
+import MenuList from "@/components/sections/MenuList";
 import { locations, menuImages } from "@/lib/data";
 
 const RED = "#FF2D2D";
@@ -165,6 +166,9 @@ export default function MenuPageContent() {
             ))}
           </div>
         </ScrollReveal>
+
+        {/* === FULL TEXT MENU === */}
+        <MenuList />
 
         {/* === CARDS ROW 1 === */}
         <div id="locations" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-[2vw] mt-12 md:mt-[5vw]">

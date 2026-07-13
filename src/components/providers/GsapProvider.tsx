@@ -27,6 +27,9 @@ export default function GsapProvider({ children }: { children: React.ReactNode }
   const minTimePassedRef = useRef(false);
   const lenisRef = useRef<Lenis | null>(null);
   const pathname = usePathname();
+  // Only the homepage has a hero video worth waiting for.
+  // On inner pages the loader should disappear almost immediately.
+  const isHomeRef = useRef(pathname === "/");
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -46,13 +49,17 @@ export default function GsapProvider({ children }: { children: React.ReactNode }
 
     lenis.on("scroll", ScrollTrigger.update);
 
+    const isHome = isHomeRef.current;
+
     const minTimer = setTimeout(() => {
       minTimePassedRef.current = true;
-      if (heroReadyRef.current) {
+      if (heroReadyRef.current || !isHome) {
+        heroReadyRef.current = true;
+        setHeroReadyState(true);
         setIsLoaded(true);
         lenis.start();
       }
-    }, 1200);
+    }, isHome ? 1000 : 400);
 
     const safetyTimer = setTimeout(() => {
       if (!minTimePassedRef.current) minTimePassedRef.current = true;
@@ -60,7 +67,7 @@ export default function GsapProvider({ children }: { children: React.ReactNode }
       setHeroReadyState(true);
       setIsLoaded(true);
       lenis.start();
-    }, 8000);
+    }, isHome ? 3500 : 1200);
 
     return () => {
       clearTimeout(minTimer);

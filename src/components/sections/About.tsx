@@ -9,14 +9,14 @@ export default function About() {
       <StickerReveal
         src="/img-webp/sticker.png"
         alt="Burger sticker"
-        className="absolute top-4 left-4 md:top-100 md:left-[3vw] w-[160px] h-[160px] md:w-[260px] md:h-[260px] z-20"
+        className="hidden md:block absolute md:top-100 md:left-[3vw] md:w-[260px] md:h-[260px] z-20"
         width={300}
         height={300}
       />
 
       <div className="w-[95%] mx-auto text-center -mt-[18vw] md:-mt-[16vw] mb-4 md:mb-[2vw]">
         <h1 className="text-stroke-180 leading-[1] text-mustard-dark text-[22vw] md:text-[16vw] uppercase font-modak tracking-wider whitespace-nowrap">
-          SPOOT&amp;
+          SPOT&amp;
         </h1>
         <h1 className="text-stroke-180 leading-[1] text-mustard-dark text-[22vw] md:text-[16vw] uppercase font-modak tracking-wider whitespace-nowrap">
           CHOO&apos;S
@@ -57,7 +57,7 @@ export default function About() {
           alt="Fries sticker"
           width={300}
           height={450}
-          className="absolute right-[7vw] md:right-[3vw] bottom-[15vw] w-[216px] h-[324px] md:w-[360px] md:h-[540px] z-20 pointer-events-none"
+          className="absolute right-[2vw] md:right-[3vw] bottom-[2vw] md:bottom-[15vw] w-[110px] h-[165px] md:w-[360px] md:h-[540px] z-20 pointer-events-none"
         />
       </div>
     </section>

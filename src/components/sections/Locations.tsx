@@ -108,7 +108,7 @@ function LocationCard({
     >
       <div className="flex flex-col gap-1">
         <h3 className="font-modak uppercase text-[#2E2A24] text-[clamp(22px,2.4vw,32px)] leading-none">
-          {loc.name}
+          {loc.nameRu}
         </h3>
         <p className="mt-2 text-[clamp(14px,1.3vw,17px)] text-[#2E2A24]/70 leading-snug">
           {loc.address}

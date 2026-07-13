@@ -49,16 +49,32 @@ export default function Header() {
             {link.label}
           </ProjectButton>
         ))}
+        <ProjectButton
+          href="https://t.me/spotandchoos"
+          external
+          variant="red"
+          className="text-[clamp(10px,1.2vw,18px)] px-[1.2vw] py-[0.4vw] h-auto"
+        >
+          Заказать
+        </ProjectButton>
       </div>
 
       <div className="flex md:hidden items-center">
         <ProjectButton
           variant="ghost"
-          className="px-2 py-2 h-auto text-[24px] border-black/10"
+          className="px-3 py-3 h-auto border-black/10"
           aria-label={mobileOpen ? "Закрыть меню" : "Открыть меню"}
           onClick={() => setMobileOpen((prev) => !prev)}
         >
-          {mobileOpen ? "×" : "☰"}
+          {mobileOpen ? (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden>
+              <path d="M6 6L18 18M18 6L6 18" />
+            </svg>
+          ) : (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden>
+              <path d="M4 6H20M4 12H20M4 18H20" />
+            </svg>
+          )}
         </ProjectButton>
       </div>
 
@@ -75,6 +91,15 @@ export default function Header() {
               {link.label}
             </ProjectButton>
           ))}
+          <ProjectButton
+            href="https://t.me/spotandchoos"
+            external
+            variant="red"
+            className="justify-center text-[clamp(16px,4vw,24px)] px-4 py-3 h-auto mt-1"
+            onClick={() => setMobileOpen(false)}
+          >
+            Заказать в Telegram
+          </ProjectButton>
         </div>
       )}
     </nav>

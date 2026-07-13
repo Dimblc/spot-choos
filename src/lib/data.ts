@@ -10,6 +10,7 @@ export type Location = {
   hours: string[];
   image: string;
   hasGallery: boolean;
+  coords: [number, number];
 };
 
 export const locations: Location[] = [
@@ -25,6 +26,7 @@ export const locations: Location[] = [
     hours: ["вс–чт  12:00 – 23:00", "пт–сб  12:00 – 00:00"],
     image: "/img-webp/orig.png",
     hasGallery: true,
+    coords: [54.8410116, 83.0930146],
   },
   {
     slug: "kom45",
@@ -38,6 +40,7 @@ export const locations: Location[] = [
     hours: ["вс–чт  12:00 – 23:00", "пт–сб  12:00 – 00:00"],
     image: "/img-webp/kom45.png",
     hasGallery: true,
+    coords: [55.0240741, 82.9232585],
   },
   {
     slug: "lite",
@@ -51,6 +54,7 @@ export const locations: Location[] = [
     hours: ["вс–сб  12:00 – 22:00"],
     image: "/img-webp/lite.png",
     hasGallery: true,
+    coords: [55.029494, 82.9171873],
   },
   {
     slug: "nstu",
@@ -64,6 +68,7 @@ export const locations: Location[] = [
     hours: ["вс–чт  12:00 – 22:00", "пт–сб  12:00 – 23:00"],
     image: "/img-webp/NSTU.png",
     hasGallery: true,
+    coords: [54.9899982, 82.9015901],
   },
   {
     slug: "koltsovo",
@@ -77,6 +82,7 @@ export const locations: Location[] = [
     hours: ["вс–сб  12:00 – 22:00"],
     image: "/img-webp/Koltsovo.png",
     hasGallery: false,
+    coords: [54.9414033, 83.1922731],
   },
 ];
 
@@ -97,6 +103,139 @@ export const menuImages: Record<string, string> = {
   nstu: "https://www.spotandchoos.com/images/menu/menu-ngtu.jpg",
   koltsovo: "https://www.spotandchoos.com/images/menu/menu-koltsovo.jpg",
 };
+
+export type MenuItem = {
+  name: string;
+  description?: string;
+  price: number | string;
+};
+
+export type MenuCategory = {
+  id: string;
+  title: string;
+  note?: string;
+  items: MenuItem[];
+};
+
+// Меню точки в Академгородке (ул. Ильича, 10). Цены в других точках могут незначительно отличаться.
+export const menuCategories: MenuCategory[] = [
+  {
+    id: "beef",
+    title: "Говядина",
+    items: [
+      { name: "Спот энд Чус", description: "котлета из фермерской говядины, сыр чеддер, бекон, секретный соус, карамелизированный лук, начос, томат, лист салата, картофельная булка", price: 570 },
+      { name: "Ноториус Би-Ай-Джи ака Расселл Вестбрук", description: "две котлеты из фермерской говядины, двойной сыр чеддер, двойной бекон, секретный соус, карамелизированный лук, начос, томат, лист салата, картофельная булка", price: 850 },
+      { name: "Чизбургер", description: "котлета из фермерской говядины, сыр чеддер, кетчуп, рубленый салат, корнишоны, картофельная булка", price: 490 },
+    ],
+  },
+  {
+    id: "chicken",
+    title: "Курица",
+    items: [
+      { name: "Дип Фрайд Ларри Бёрд", description: "котлета из курицы в хрустящей панировке с чеддером и халапеньо внутри, горчичный соус, красная капуста, рубленый салат, корнишоны, картофельная булка", price: 540 },
+      { name: "Чикен Ранч Бургер", description: "две тонкие куриные котлетки, сыр чеддер, домашний соус ранч, томат, рубленый салат, корнишоны, картофельная булка", price: 470 },
+      { name: "Буррито Барбекю", description: "куриный фарш, сыр гауда, болгарский перец, кукуруза, красный лук, соус барбекю, травы и специи, тортилья + чесночный соус", price: 420 },
+    ],
+  },
+  {
+    id: "veggie",
+    title: "Веджи",
+    note: "Растительная котлета hi food — можно заменить в любом бургере (готовим на одном гриле)",
+    items: [
+      { name: "Веджи Бургер", description: "хэшбраун, яйцо, сыр чеддер, секретный соус, карамелизированный лук, томат, лист салата, картофельная булка", price: 420 },
+      { name: "Веджи Буррито", description: "говядина hi, сыр чеддер, шампиньоны, красная фасоль, лук, томаты, специи, тортилья + соус гуакамоле", price: 390 },
+    ],
+  },
+  {
+    id: "special",
+    title: "Спэшл месяца",
+    items: [
+      { name: "Пэтти Мэлт", description: "две тонкие смэш котлеты, сыр чеддер, лук, соус с перцем чипотле и корнишонами, молочный хлеб", price: 650 },
+    ],
+  },
+  {
+    id: "snacks",
+    title: "Закуски",
+    items: [
+      { name: "Картоша Фри", description: "ориджинал / лайм-кинза, + кекчук", price: 190 },
+      { name: "Луковые кольца", description: "+ соус спот энд чус / чипотле", price: 220 },
+      { name: "Картофельные дольки", description: "+ соус сырный", price: 240 },
+      { name: "Батат ака сладкая картоша", description: "+ соус тоскана", price: 320 },
+      { name: "Сырные шарики", description: "+ соус спот энд чус", price: 250 },
+    ],
+  },
+  {
+    id: "soup",
+    title: "Суп",
+    items: [
+      { name: "Сырный крем-суп", description: "остренький сырный крем-суп с курицей, беконом, специями и хрустящим луком", price: 270 },
+    ],
+  },
+  {
+    id: "sauces",
+    title: "Соусы",
+    items: [
+      { name: "Спот энд чус, сырный, том ям, чесночный, тоскана, чипотле, трюфельный", price: 60 },
+    ],
+  },
+  {
+    id: "extras",
+    title: "Добавки",
+    items: [
+      { name: "Котлета из фермерской говядины", price: 280 },
+      { name: "Котлета дип фрайд ларри бёрд", price: 260 },
+      { name: "Луковые кольца", price: 60 },
+      { name: "Хэшбраун", price: 60 },
+      { name: "Бекон", price: 60 },
+      { name: "Сыр чеддер", price: 60 },
+      { name: "Яйцо", price: 50 },
+      { name: "Корнишоны", price: 50 },
+      { name: "Халапеньо", price: 50 },
+      { name: "Остро", price: "от 1 до 10" },
+    ],
+  },
+  {
+    id: "desserts",
+    title: "Десерты",
+    items: [
+      { name: "Баноффи Пай", description: "песочное печенье, банан, варёная сгущёнка и взбитые сливки (+арахисово-карамельный кранч)", price: 260 },
+      { name: "Ки Лайм Кейк", description: "песочный корж с вяленой клюквой, творожный сыр, сгущёнка, лайм и взбитые сливки", price: 260 },
+    ],
+  },
+  {
+    id: "combo",
+    title: "Комбо",
+    items: [
+      { name: "420 Комбо", description: "бургер, картоша фри + кекчук, холодный чай (любой бургер, кроме Ноториуса и спэшла)", price: 750 },
+      { name: "Острое Комбо", description: "спот энд чус с халапеньо, луковые кольца + соус на выбор, холодный чай", price: 820 },
+      { name: "Детское Комбо", description: "мини бургер, мини картоша фри + кекчук, холодный чай (мини картофельная булочка, сыр чеддер, котлета из мраморной говядины, соус биг мак)", price: 450 },
+    ],
+  },
+  {
+    id: "drinks",
+    title: "Напитки",
+    items: [
+      { name: "Холодный чай", description: "чёрный / зелёный", price: 140 },
+      { name: "Лимонад Спот энд Чус", price: 220 },
+      { name: "Пош Физзи", description: "Coca Cola, Dr Pepper, Sprite", price: 250 },
+      { name: "Добрый Кола", price: 150 },
+      { name: "Сок", price: 150 },
+      { name: "Фильтр кофе", price: 120 },
+      { name: "Травяной чай", price: 100 },
+    ],
+  },
+  {
+    id: "beer",
+    title: "Пиво",
+    items: [
+      { name: "Пиво 0.33", price: 350 },
+      { name: "Сидр 0.5", price: 480 },
+      { name: "Смэшер Санрайс", description: "Spot & Choo's", price: 380 },
+    ],
+  },
+];
+
+export const happyHours = "Счастливые часы: с 12:00 до 16:00 в рабочие дни — получай 20% от заказа баллами";
 
 export const navLinks = [
   { href: "/menu", label: "Меню" },
@@ -190,7 +329,7 @@ export const galleryCategories = [
   },
   {
     id: "food",
-    title: "Еда",
+    title: "Е��а",
     images: [
       "https://cdn.prod.website-files.com/64d8af984c758e0313a895b7/64fe82259732cbbaa5ac9269_photo_2023-08-02%2012.35%201.png",
       "https://cdn.prod.website-files.com/64d8af984c758e0313a895b7/64fe82246abe46916d786381_IMG_9487%201.png",

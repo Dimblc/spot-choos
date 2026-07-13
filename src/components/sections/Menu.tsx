@@ -21,7 +21,7 @@ export default function Menu() {
         className="absolute right-0 md:right-[1vw] top-[55%] w-[90px] h-[90px] md:w-[200px] md:h-[200px] object-contain z-30 pointer-events-none -rotate-6"
       />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 flex flex-col items-center leading-[1.2] select-none pointer-events-none" style={{ rotate: "6deg" }}>
-        <span className="text-[clamp(120px,36vw,560px)] font-modak uppercase text-[#7a0a06] whitespace-nowrap">SPOOT&amp;</span>
+        <span className="text-[clamp(120px,36vw,560px)] font-modak uppercase text-[#7a0a06] whitespace-nowrap">SPOT&amp;</span>
         <span className="text-[clamp(120px,36vw,560px)] font-modak uppercase text-[#7a0a06] whitespace-nowrap">CHOO&apos;S</span>
       </div>
 
